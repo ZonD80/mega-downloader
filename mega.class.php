@@ -186,8 +186,10 @@ class MEGA {
             $buffer = $bytes > $length ? substr($buffer, $length) : '';
 
             $chunk = mdecrypt_generic($cipher, $chunk);
-            if ($as_attachment)
+            if ($as_attachment) {
                 print $chunk;
+                ob_flush();
+                }
             else
                 fwrite($destfile, $chunk);
         }
