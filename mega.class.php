@@ -1,12 +1,13 @@
 <?php
 
 /**
- * Mega.co.nz downloader
+ * mega.co.nz downloader
  * Require mcrypt, curl
  * @license GNU GPLv3 http://opensource.org/licenses/gpl-3.0.html
  * @author ZonD80
  */
-class MEGA {
+class MEGA
+{
 
     private $seqno, $f;
 
@@ -14,30 +15,36 @@ class MEGA {
      * Class constructor
      * @param string $file_hash File hash, coming after # in mega URL
      */
-    function __construct($file_hash) {
+    function __construct($file_hash)
+    {
         $this->seqno = 0;
         $this->f = $this->mega_get_file_info($file_hash);
     }
 
-    function a32_to_str($hex) {
+    function a32_to_str($hex)
+    {
         return call_user_func_array('pack', array_merge(array('N*'), $hex));
     }
 
-    function aes_ctr_decrypt($data, $key, $iv) {
+    function aes_ctr_decrypt($data, $key, $iv)
+    {
         return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $data, 'ctr', $iv);
     }
 
-    function base64_to_a32($s) {
+    function base64_to_a32($s)
+    {
         return $this->str_to_a32($this->base64urldecode($s));
     }
 
-    function base64urldecode($data) {
+    function base64urldecode($data)
+    {
         $data .= substr('==', (2 - strlen($data) * 3) % 4);
         $data = str_replace(array('-', '_', ','), array('+', '/', ''), $data);
         return base64_decode($data);
     }
 
-    function str_to_a32($b) {
+    function str_to_a32($b)
+    {
         // Add padding, we need a string with a length multiple of 4
         $b = str_pad($b, 4 * ceil(strlen($b) / 4), "\0");
         return array_values(unpack('N*', $b));
@@ -48,7 +55,8 @@ class MEGA {
      * @param array $req data to be sent to mega
      * @return type
      */
-    function mega_api_req($req) {
+    function mega_api_req($req)
+    {
 
         $ch = curl_init('https://g.api.mega.co.nz/cs?id=' . ($this->seqno++)/* . ($sid ? '&sid=' . $sid : '') */);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -60,11 +68,13 @@ class MEGA {
         return $resp[0];
     }
 
-    function aes_cbc_decrypt($data, $key) {
+    function aes_cbc_decrypt($data, $key)
+    {
         return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
     }
 
-    function mega_dec_attr($attr, $key) {
+    function mega_dec_attr($attr, $key)
+    {
         $attr = trim($this->aes_cbc_decrypt($attr, $this->a32_to_str($key)));
         if (substr($attr, 0, 6) != 'MEGA{"') {
             return false;
@@ -78,7 +88,8 @@ class MEGA {
      * @param string $local_path Save file to specified by $local_path folder
      * @return boolean True
      */
-    function download($as_attachment = true, $local_path = null) {
+    function download($as_attachment = true, $local_path = null)
+    {
         $ch = curl_init($this->f['binary_url']);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         //curl_setopt($ch, CURLOPT_VERBOSE, true);
@@ -107,7 +118,8 @@ class MEGA {
           } */
     }
 
-    function get_chunks($size) {
+    function get_chunks($size)
+    {
         $chunks = array();
         $p = $pp = 0;
 
@@ -137,9 +149,9 @@ class MEGA {
      * @param string $local_path Save file to specified by $local_path folder
      * @return boolean True
      */
-    function stream_download($as_attachment = true, $local_path = null) {
+    function stream_download($as_attachment = true, $local_path = null)
+    {
 
-        //$data = $this->aes_ctr_decrypt($data_enc, $this->a32_to_str($this->f['k']), $this->a32_to_str($this->f['iv']));
         if ($as_attachment) {
             header("Content-Disposition: attachment;filename=\"{$this->f['attr']['n']}\"");
             header('Content-Description: File Transfer');
@@ -189,8 +201,8 @@ class MEGA {
             if ($as_attachment) {
                 print $chunk;
                 ob_flush();
-                }
-            else
+                ob_clean();
+            } else
                 fwrite($destfile, $chunk);
         }
 
@@ -209,7 +221,8 @@ class MEGA {
           } */
     }
 
-    private function mega_get_file_info($hash) {
+    private function mega_get_file_info($hash)
+    {
         preg_match('/\!(.*?)\!(.*)/', $hash, $matches);
         $id = $matches[1];
         $key = $matches[2];
@@ -226,7 +239,8 @@ class MEGA {
      * Returns file information
      * @return array File information
      */
-    public function file_info() {
+    public function file_info()
+    {
         return $this->f;
     }
 
