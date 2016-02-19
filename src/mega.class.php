@@ -142,15 +142,15 @@ class MEGA
                 $mega->download(false,$filename);
                 $file_info = $mega->file_info();
                 $zip->add_file_from_path($file_info['attr']['n'], $filename);
+                @unlink($filename);
 
             }
         } else {
             $zip = new ZipStream("{$this->f['attr']['n']}.zip");
             $filename = tempnam("/tmp", 'mega-download-');
             $this->download(false, $filename);
-
             $zip->add_file_from_path($this->f['attr']['n'], $filename);
-
+            @unlink($filename);
         }
         $zip->finish();
     }
