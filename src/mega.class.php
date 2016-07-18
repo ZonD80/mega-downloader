@@ -17,6 +17,7 @@ class MEGA
      */
     function __construct($file_hash,$folder_id='')
     {
+        date_default_timezone_set(@date_default_timezone_get());
         $this->seqno = 1;
         if (preg_match('/\#F/',$file_hash)) {
             $this->files = $this->mega_get_folder_info($file_hash);
