@@ -8,14 +8,13 @@ PHP script to download files and folders (as ZIPs) from Mega.co.nz
 If you are downloading folder, make sure you have enough local space available.
 
 #Usage
-
-	```bash
+```bash
 	# download composer.phar
 	curl -sS https://getcomposer.org/installer | php
 	
 	# use composer.phar and  install required packages.
 	php composer.pahr install
-	```
+```
 
 #Change log
 ####2016/07/21
