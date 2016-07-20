@@ -20,7 +20,7 @@ php composer.pahr install
 #Change log
 ###2016/07/21
 + using Guzzle library , comodojo/zip and symfony/console(future)
-+ Using composer to manage package
++ using composer to manage package
 + fix origin project that cannot support on Windows and Linux_X86.
 + fix some Undefined messages.
 + remove zipstream.php and use comodojo/zip library
