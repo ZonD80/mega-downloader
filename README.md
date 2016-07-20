@@ -15,8 +15,6 @@ curl -sS https://getcomposer.org/installer | php
 # use composer.phar and  install required packages.
 php composer.pahr install
 
-# use composer.phar and  install required packages.
-php composer.pahr install
 ```
 
 #Change log
