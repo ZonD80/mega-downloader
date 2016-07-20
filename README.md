@@ -9,11 +9,11 @@ If you are downloading folder, make sure you have enough local space available.
 
 #Usage
 ```bash
-	# download composer.phar
-	curl -sS https://getcomposer.org/installer | php
+# download composer.phar
+curl -sS https://getcomposer.org/installer | php
 	
-	# use composer.phar and  install required packages.
-	php composer.pahr install
+# use composer.phar and  install required packages.
+php composer.pahr install
 ```
 
 #Change log
