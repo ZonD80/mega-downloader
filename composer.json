@@ -1,0 +1,7 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^6.2",
+        "comodojo/zip": "^2.0",
+        "symfony/console": "^3.1"
+    }
+}
