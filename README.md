@@ -1,4 +1,4 @@
-mega-downloader(peter279k)
+mega-downloader
 ===============
 
 #Introduction
