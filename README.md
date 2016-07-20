@@ -16,7 +16,6 @@ If you are downloading folder, make sure you have enough local space available.
 	# use composer.phar and  install required packages.
 	php composer.pahr install
 	```
-
 #Change log
 ####2016/07/21
 + using Guzzle library , comodojo/zip and symfony/console(future)
