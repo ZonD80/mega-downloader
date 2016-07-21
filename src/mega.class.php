@@ -221,11 +221,10 @@
 		* @return boolean True
 		*/
 		public function download($as_attachment = false, $local_path = null) {
-			/*
+			
 			if($this -> is_folder) {
 				die("You can not download raw folders. Use download_zip() instead.\n");
 			}
-			*/
 
 			echo "download starts...\n";
 		
