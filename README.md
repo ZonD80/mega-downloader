@@ -19,6 +19,9 @@ php composer.phar  install
 
 ```
 
+#Sample code
+You can refer example_file.php and example_folder.php
+
 #Change log
 ###2016/07/21
 + Typo fix in README.md

@@ -220,11 +220,7 @@
 		* @param string $local_path Save file to specified by $local_path folder
 		* @return boolean True
 		*/
-		public function download($as_attachment = false, $local_path = null) {
-			
-			if($this -> is_folder) {
-				die("You can not download raw folders. Use download_zip() instead.\n");
-			}
+		private function download($as_attachment = false, $local_path = null) {
 
 			echo "download starts...\n";
 		
