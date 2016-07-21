@@ -203,9 +203,6 @@ class MEGA
      * @return boolean True
      */
     private function download($as_attachment = true, $local_path = null) {
-        if ($this->is_folder) {
-            die("You can not download raw folders. Use download_zip() instead.");
-        }
 		
 		echo "download starts...\n";
 		
