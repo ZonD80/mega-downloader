@@ -25,7 +25,7 @@
 		*/
 		public function __construct($file_hash, $folder_id='') {
 			$this -> seqno = 1;
-			if(preg_match('/\#F/', $file_hash)) {
+			if(preg_match('/folder/', $file_hash)) {
 				$this -> files = $this -> mega_get_folder_info($file_hash);
 				$this -> is_folder = true;
 			}
