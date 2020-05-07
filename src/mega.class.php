@@ -309,7 +309,9 @@
 		}
 
 		private function mega_get_file_info($hash, $folder_id='') {
-			preg_match('/\!(.*?)\!(.*)/', $hash, $matches);
+			if (!preg_match('/\!(.*?)\!(.*)/', $hash, $matches)) {
+				preg_match('/file\/(.*?)#(.*)/', $hash, $matches);
+			}
 			$id = $matches[1];
 			$key = $matches[2];
 			$key = $this -> base64_to_a32($key);
@@ -341,7 +343,9 @@
 		}
 
 		private function mega_get_folder_info($hash) {
-			preg_match('/\!(.*?)\!(.*)/', $hash, $matches);
+			if (!preg_match('/\!(.*?)\!(.*)/', $hash, $matches)) {
+				preg_match('/folder\/(.*?)#(.*)/', $hash, $matches);
+			}
 			$id = $matches[1];
 			$key = $matches[2];
 			$key = $this -> base64_to_a32($key);
