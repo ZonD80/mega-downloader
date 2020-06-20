@@ -2,7 +2,7 @@
 	
 	ini_set("allow_url_fopen", "On");
 	
-	require "vendor/autoload.php";
+	require __DIR__ . "/../vendor/autoload.php";
 
 	use GuzzleHttp\Client;
 	use Psr\Http\Message\ResponseInterface;
